@@ -37,14 +37,101 @@
             display: flex;
             flex-wrap: wrap;
             background-color: white;
-            border-bottom: 1px solid #e5e7eb;
-            padding: 0 40px;
-            margin-top: 40px;
-            border-radius: 8px 8px 0 0;
-            margin-left: 40px;
-            margin-right: 40px;
-            border: 1px solid #e5e7eb;
+            padding: 0;
+            margin-top: 20px;
+            margin-left: 20px;
+            margin-right: 20px;
+            border-bottom: 1px solid #d1d5db;
+        }
+
+        .tab-item {
+            padding: 10px 15px;
+            font-size: 13px;
+            color: #6b7280;
+            text-decoration: none;
+            border: 1px solid transparent;
             border-bottom: none;
+            margin-bottom: -1px; /* Overlap bottom border */
+            border-radius: 4px 4px 0 0;
+            white-space: nowrap;
+        }
+
+        .tab-item:hover {
+            border-color: #e5e7eb #e5e7eb transparent;
+        }
+        
+        .tab-item.active {
+            color: #2563eb; /* A more distinct blue for active tab text */
+            font-weight: 500;
+            background-color: white;
+            border-color: #d1d5db #d1d5db transparent;
+        }
+        
+        /* Container for Tabs to create the continuous top border look from image */
+        .tabs-container {
+             background-color: #f3f4f6; /* Gray background for the whole page below header */
+             padding-top: 20px;
+        }
+
+        /* Main Content Area */
+        .main-container-wrapper {
+            background-color: #f3f4f6;
+            padding: 0 20px 40px 20px;
+            min-height: calc(100vh - 140px); /* Adjust based on header height */
+            display: flex;
+            justify-content: center; /* Center the white box */
+        }
+
+        .main-container {
+            background-color: white;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            padding: 30px 40px;
+            width: 100%;
+            max-width: 900px; /* Constrain width to match screenshot proportion */
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* Subtle shadow */
+            margin-top: 20px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            color: #1f2937;
+            margin-bottom: 30px;
+            font-weight: 500;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 15px;
+        }
+
+        /* Form Row Styling */
+        .category-header {
+            color: #6b7280;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        .check-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .check-name {
+            flex: 0 0 45%; /* Give name more space */
+            font-size: 13px;
+            color: #1f2937;
+            padding-right: 20px;
+        }
+
+        /* Input Controls Container */
+        .controls-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 20px; /* Increased gap */
         }
 
         .tab-item {
@@ -146,19 +233,106 @@
             box-sizing: border-box;
         }
         
+        /* Specific styling for empty inputs to look like placeholder lines or blank */
+        .text-input-box::placeholder {
+            color: #9ca3af;
+        }
+
         .text-input-box:focus {
             border-color: #4A90E2;
         }
 
-        /* ETA Number Display */
-        .eta-number {
-            font-size: 14px;
-            color: #374151;
-            font-weight: 600;
-            width: 40px;
+        /* Range Inputs */
+        .range-container {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .small-num {
+            width: 65px;
+            height: 32px;
             text-align: center;
+            -moz-appearance: textfield; /* Firefox */
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            padding: 6px;
+            font-size: 13px;
+            color: #374151;
+            outline: none;
+            box-sizing: border-box;
+            background-color: white;
         }
         
+        .small-num:focus {
+            border-color: #4A90E2;
+        }
+
+        /* Remove arrows from number inputs for a cleaner UI */
+        .small-num::-webkit-outer-spin-button,
+        .small-num::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .range-separator {
+            color: #6b7280;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        /* ETA Number Display and Info Icon */
+        .sigma-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 80px; /* Fixed width for alignment */
+        }
+        
+        .sigma-box {
+            width: 45px;
+            height: 32px;
+            text-align: center;
+            background-color: white; /* Changed to white */
+            color: #374151;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            padding: 6px;
+            font-size: 13px;
+            font-weight: 400; /* Normal weight */
+            box-sizing: border-box;
+            outline: none;
+        }
+        
+        /* Question Mark Icon */
+        .info-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background-color: transparent; /* No background */
+            color: #9ca3af; /* Gray color */
+            border: 1px solid #9ca3af; /* Gray border */
+            font-size: 12px;
+            font-family: sans-serif; /* Cleaner font for ? */
+            font-weight: bold;
+            font-style: normal;
+            cursor: help;
+            flex-shrink: 0;
+        }
+        
+        .info-icon:hover {
+            color: #6b7280;
+            border-color: #6b7280;
+        }
+        
+        /* Hide icon when no sigma data */
+        .sigma-container.empty .info-icon {
+            display: none;
+        }
+
         /* Floating Button Bottom Right */
         .floating-btn-container {
             position: fixed;
@@ -206,36 +380,40 @@
         <a href="#" class="header-link">Logout</a>
     </header>
 
-    <!-- Tab Navigation -->
-    <nav class="tab-nav">
-        <a href="#" class="tab-item">Client Account</a>
-        <a href="#" class="tab-item">Manage Users</a>
-        <a href="#" class="tab-item">Departments</a>
-        <a href="#" class="tab-item">Location</a>
-        <a href="#" class="tab-item">Links</a>
-        <a href="#" class="tab-item">Customization</a>
-        <a href="#" class="tab-item">Verifications</a>
-        <a href="#" class="tab-item">Candidates</a>
-        <a href="#" class="tab-item">Preference</a>
-        <a href="#" class="tab-item">ATS</a>
-        <a href="#" class="tab-item">Packages</a>
-        <a href="#" class="tab-item">Ala Carte</a>
-        <a href="#" class="tab-item active">ETA</a>
-        <a href="#" class="tab-item">Integrations</a>
-        <a href="#" class="tab-item">Tags</a>
-        <a href="#" class="tab-item">Custom Forms</a>
-        <a href="#" class="tab-item">Invoice Fees</a>
-        <a href="#" class="tab-item">Renewal Info</a>
-    </nav>
+    <div class="tabs-container">
+        <!-- Tab Navigation -->
+        <nav class="tab-nav">
+            <a href="#" class="tab-item">Client Account</a>
+            <a href="#" class="tab-item">Manage Users</a>
+            <a href="#" class="tab-item">Departments</a>
+            <a href="#" class="tab-item">Location</a>
+            <a href="#" class="tab-item">Links</a>
+            <a href="#" class="tab-item">Customization</a>
+            <a href="#" class="tab-item">Verifications</a>
+            <a href="#" class="tab-item">Candidates</a>
+            <a href="#" class="tab-item">Preference</a>
+            <a href="#" class="tab-item">ATS</a>
+            <a href="#" class="tab-item">Packages</a>
+            <a href="#" class="tab-item">Ala Carte</a>
+            <a href="#" class="tab-item active">ETA</a>
+            <a href="#" class="tab-item">Integrations</a>
+            <a href="#" class="tab-item">Tags</a>
+            <a href="#" class="tab-item">Custom Forms</a>
+            <a href="#" class="tab-item">Invoice Fees</a>
+            <a href="#" class="tab-item">Renewal Info</a>
+        </nav>
+    </div>
 
-    <!-- Main Content -->
-    <main class="main-container">
-        <h1 class="section-title">ETA for each checks</h1>
+    <!-- Main Content Wrapper for Gray Background and Centering -->
+    <div class="main-container-wrapper">
+        <main class="main-container">
+            <h1 class="section-title">ETA Checks</h1>
 
-        <div id="checks-container">
-            <!-- Content will be injected by JS -->
-        </div>
-    </main>
+            <div id="checks-container">
+                <!-- Content will be injected by JS -->
+            </div>
+        </main>
+    </div>
     
     <!-- Floating Buttons (like in image) -->
     <div class="floating-btn-container">
@@ -253,27 +431,30 @@
             {
                 category: 'IDENTITY',
                 items: [
-                    { name: 'Identity Solution', days: '1-2 days', details: 'Awaiting vendor confirmation', sigmaData: 2 },
-                    { name: 'Social Security Trace', days: '0-1 days', details: '5', sigmaData: 5 }
+                    { name: 'Identity Solution', minDays: 1, maxDays: 3, details: '1-3 days', sigmaData: '2' },
+                    { name: 'Social Security Trace', minDays: 1, maxDays: 3, details: '1-3 days', sigmaData: '2' }
                 ]
             },
             {
                 category: 'BASIC CRIMINAL',
                 items: [
-                    { name: 'Child Abuse Registry - Pennsylvania', days: '3-5 days', details: 'State repository delay', sigmaData: 2 },
-                    { name: 'FDA Debarment', days: '1-3 days', details: '5', sigmaData: 1 },
-                    { name: 'GSA/SAM List', days: '1-2 days', details: '5', sigmaData: 3 },
-                    { name: 'Healthcare Sanctions Level 3', days: '2-4 days', details: 'Processing records', sigmaData: 4 },
-                    { name: 'National Criminal', days: '1-3 days', details: '5', sigmaData: 5 },
-                    { name: 'OIG Department of Health and Human Services', days: '1-2 days', details: '5', sigmaData: 2 },
-                    { name: 'Sanctions and Watchlist Search', days: '1-2 days', details: 'Needs additional info', sigmaData: 1 },
-                    { name: 'Sex Offender', days: '1-3 days', details: '5', sigmaData: 3 }
+                    { name: 'Child Abuse Registry - Pennsylvania', minDays: 3, maxDays: 7, details: '3-7 days', sigmaData: '5' },
+                    { name: 'FDA Debarment', minDays: 0, maxDays: 1, details: 'Same day', sigmaData: '1' },
+                    { name: 'GSA/SAM List', minDays: '', maxDays: '', details: '', sigmaData: '' }, // Empty example
+                    { name: 'Healthcare Sanctions Level 3', minDays: 0, maxDays: 1, details: '24 hours', sigmaData: '1' },
+                    { name: 'National Criminal', minDays: 1, maxDays: 3, details: '1-3 days', sigmaData: '2' },
+                    { name: 'OIG Department of Health and Human Services', minDays: 0, maxDays: 1, details: 'Same day', sigmaData: '1' },
+                    { name: 'Sanctions and Watchlist Search', minDays: '', maxDays: '', details: '', sigmaData: '' }, // Empty example
+                    { name: 'Sex Offender', minDays: 1, maxDays: 3, details: '1-3 days', sigmaData: '2' }
                 ]
             },
             {
                 category: 'ADVANCED CRIMINAL',
                 items: [
-                     { name: 'Advanced Background Search', days: '5-7 days', details: 'Requires physical county search', sigmaData: 7 }
+                     { name: 'Abuse Registry - Wisconsin', minDays: '', maxDays: '', details: '', sigmaData: '' }, // Empty example
+                     { name: 'Adult Abuse Registry', minDays: 3, maxDays: 7, details: '3-7 days', sigmaData: '5' },
+                     { name: 'Canadian Checks', minDays: '', maxDays: '', details: '', sigmaData: '' }, // Empty example
+                     { name: 'Colorado CAPS', minDays: 0, maxDays: 0, details: '', sigmaData: '0' }
                 ]
             }
         ];
@@ -288,18 +469,28 @@
 
                 // Add Items
                 section.items.forEach(item => {
+                    const tooltipText = item.sigmaData ? `Average days required: ${item.sigmaData}` : '';
+                    const isEmpty = item.sigmaData === '';
+                    
                     html += `
                         <div class="check-row">
                             <div class="check-name">${item.name}</div>
                             <div class="controls-container">
-                                <!-- Box for manually adding days range -->
-                                <input type="text" class="form-input" value="${item.days}" placeholder="e.g. 2-3 days">
+                                <!-- Two boxes for manually adding days range -->
+                                <div class="range-container">
+                                    <input type="number" class="small-num" value="${item.minDays !== '' ? item.minDays : ''}" min="0">
+                                    <span class="range-separator">-</span>
+                                    <input type="number" class="small-num" value="${item.maxDays !== '' ? item.maxDays : ''}" min="0">
+                                </div>
                                 
-                                <!-- Text box for details/messages/integers -->
-                                <input type="text" class="text-input-box" value="${item.details}" placeholder="Enter details">
+                                <!-- Text box for details/messages -->
+                                <input type="text" class="text-input-box" value="${item.details}" placeholder="${isEmpty ? 'Enter details' : ''}">
                                 
-                                <!-- Integer value from sigma report -->
-                                <div class="eta-number" title="Days required (from sigma report)">${item.sigmaData}</div>
+                                <!-- Integer value from sigma report inside a box with info icon -->
+                                <div class="sigma-container ${isEmpty ? 'empty' : ''}">
+                                    <input type="text" class="sigma-box" value="${item.sigmaData}" readonly ${isEmpty ? 'style="border-color: #e5e7eb; background-color: #f9fafb;"' : ''}>
+                                    <span class="info-icon" title="${tooltipText}">?</span>
+                                </div>
                             </div>
                         </div>
                     `;
