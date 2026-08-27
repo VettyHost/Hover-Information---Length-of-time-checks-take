@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETA Checks Demo</title>
+    <style>
+        /* Custom styles to match the specific look of the image */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f3f4f6; /* Light gray background */
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* Top Blue Header */
+        .top-header {
+            background-color: #4A90E2; /* Specific blue from image */
+            color: white;
+            padding: 10px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 120px; /* Approximate height */
+        }
+
+        .header-link {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Secondary Tab Navigation */
+        .tab-nav {
+            display: flex;
+            flex-wrap: wrap;
+            background-color: white;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 0 40px;
+            margin-top: 40px;
+            border-radius: 8px 8px 0 0;
+            margin-left: 40px;
+            margin-right: 40px;
+            border: 1px solid #e5e7eb;
+            border-bottom: none;
+        }
+
+        .tab-item {
+            padding: 10px 15px;
+            font-size: 12px;
+            color: #6b7280;
+            text-decoration: none;
+            border-right: 1px solid #e5e7eb;
+            white-space: nowrap;
+        }
+
+        .tab-item:last-child {
+            border-right: none;
+        }
+        
+        .tab-item.active {
+            color: #4A90E2;
+            font-weight: 600;
+        }
+
+        /* Main Content Area */
+        .main-container {
+            background-color: white;
+            margin: 0 40px 40px 40px;
+            border: 1px solid #e5e7eb;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            padding: 30px 40px;
+            min-height: calc(100vh - 250px);
+        }
+
+        .section-title {
+            font-size: 24px;
+            color: #374151;
+            margin-bottom: 30px;
+            font-weight: 400;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 10px;
+        }
+
+        /* Form Row Styling */
+        .category-header {
+            color: #9ca3af;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .check-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .check-name {
+            flex: 0 0 40%;
+            font-size: 13px;
+            color: #374151;
+            padding-right: 20px;
+        }
+
+        /* Input Controls Container */
+        .controls-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* Inputs */
+        .form-input {
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            padding: 6px 10px;
+            font-size: 13px;
+            color: #374151;
+            outline: none;
+            width: 140px;
+            height: 32px;
+            box-sizing: border-box;
+        }
+        
+        .form-input:focus {
+            border-color: #4A90E2;
+        }
+        
+        .text-input-box {
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            padding: 6px 10px;
+            font-size: 13px;
+            color: #374151;
+            outline: none;
+            width: 200px;
+            height: 32px;
+            box-sizing: border-box;
+        }
+        
+        .text-input-box:focus {
+            border-color: #4A90E2;
+        }
+
+        /* ETA Number Display */
+        .eta-number {
+            font-size: 14px;
+            color: #374151;
+            font-weight: 600;
+            width: 40px;
+            text-align: center;
+        }
+        
+        /* Floating Button Bottom Right */
+        .floating-btn-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .floating-btn-blue {
+            background-color: #4A90E2;
+            color: white;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border-radius: 2px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .floating-btn-white {
+            background-color: white;
+            color: #6b7280;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border-radius: 2px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            border: 1px solid #e5e7eb;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Top Header -->
+    <header class="top-header">
+        <a href="#" class="header-link">Dashboard</a>
+        <a href="#" class="header-link">Logout</a>
+    </header>
+
+    <!-- Tab Navigation -->
+    <nav class="tab-nav">
+        <a href="#" class="tab-item">Client Account</a>
+        <a href="#" class="tab-item">Manage Users</a>
+        <a href="#" class="tab-item">Departments</a>
+        <a href="#" class="tab-item">Location</a>
+        <a href="#" class="tab-item">Links</a>
+        <a href="#" class="tab-item">Customization</a>
+        <a href="#" class="tab-item">Verifications</a>
+        <a href="#" class="tab-item">Candidates</a>
+        <a href="#" class="tab-item">Preference</a>
+        <a href="#" class="tab-item">ATS</a>
+        <a href="#" class="tab-item">Packages</a>
+        <a href="#" class="tab-item">Ala Carte</a>
+        <a href="#" class="tab-item active">ETA</a>
+        <a href="#" class="tab-item">Integrations</a>
+        <a href="#" class="tab-item">Tags</a>
+        <a href="#" class="tab-item">Custom Forms</a>
+        <a href="#" class="tab-item">Invoice Fees</a>
+        <a href="#" class="tab-item">Renewal Info</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <h1 class="section-title">ETA for each checks</h1>
+
+        <div id="checks-container">
+            <!-- Content will be injected by JS -->
+        </div>
+    </main>
+    
+    <!-- Floating Buttons (like in image) -->
+    <div class="floating-btn-container">
+        <div class="floating-btn-blue">
+            <span style="font-family: monospace; font-size: 16px;">V</span>
+        </div>
+        <div class="floating-btn-white">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-refresh-cw"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+        </div>
+    </div>
+
+    <script>
+        // Data structure representing the checks, updated with textual states and day ranges
+        const checkData = [
+            {
+                category: 'IDENTITY',
+                items: [
+                    { name: 'Identity Solution', days: '1-2 days', details: 'Awaiting vendor confirmation', sigmaData: 2 },
+                    { name: 'Social Security Trace', days: '0-1 days', details: '5', sigmaData: 5 }
+                ]
+            },
+            {
+                category: 'BASIC CRIMINAL',
+                items: [
+                    { name: 'Child Abuse Registry - Pennsylvania', days: '3-5 days', details: 'State repository delay', sigmaData: 2 },
+                    { name: 'FDA Debarment', days: '1-3 days', details: '5', sigmaData: 1 },
+                    { name: 'GSA/SAM List', days: '1-2 days', details: '5', sigmaData: 3 },
+                    { name: 'Healthcare Sanctions Level 3', days: '2-4 days', details: 'Processing records', sigmaData: 4 },
+                    { name: 'National Criminal', days: '1-3 days', details: '5', sigmaData: 5 },
+                    { name: 'OIG Department of Health and Human Services', days: '1-2 days', details: '5', sigmaData: 2 },
+                    { name: 'Sanctions and Watchlist Search', days: '1-2 days', details: 'Needs additional info', sigmaData: 1 },
+                    { name: 'Sex Offender', days: '1-3 days', details: '5', sigmaData: 3 }
+                ]
+            },
+            {
+                category: 'ADVANCED CRIMINAL',
+                items: [
+                     { name: 'Advanced Background Search', days: '5-7 days', details: 'Requires physical county search', sigmaData: 7 }
+                ]
+            }
+        ];
+
+        function renderChecks() {
+            const container = document.getElementById('checks-container');
+            let html = '';
+
+            checkData.forEach(section => {
+                // Add Category Header
+                html += `<div class="category-header">${section.category}</div>`;
+
+                // Add Items
+                section.items.forEach(item => {
+                    html += `
+                        <div class="check-row">
+                            <div class="check-name">${item.name}</div>
+                            <div class="controls-container">
+                                <!-- Box for manually adding days range -->
+                                <input type="text" class="form-input" value="${item.days}" placeholder="e.g. 2-3 days">
+                                
+                                <!-- Text box for details/messages/integers -->
+                                <input type="text" class="text-input-box" value="${item.details}" placeholder="Enter details">
+                                
+                                <!-- Integer value from sigma report -->
+                                <div class="eta-number" title="Days required (from sigma report)">${item.sigmaData}</div>
+                            </div>
+                        </div>
+                    `;
+                });
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Initialize the UI
+        document.addEventListener('DOMContentLoaded', renderChecks);
+    </script>
+</body>
+</html>
