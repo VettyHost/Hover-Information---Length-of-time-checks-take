@@ -35,35 +35,23 @@
 
         /* Secondary Tab Navigation */
         .tab-nav-container {
-            max-width: 1200px;
-            width: 85%;
+            max-width: 1450px; /* Increased width to extend beyond the main white tile */
+            width: 95%;
             margin: 0 auto;
             padding: 40px 0 0 0;
+            display: flex;
+            justify-content: center; /* Centers the row of tabs */
         }
 
         .tab-nav {
             display: flex;
             flex-wrap: nowrap; /* Forces all tabs into exactly 1 row */
-            overflow-x: auto; /* Allows scrolling if screen is too small */
             margin: 0;
-            padding: 0 0 6px 0; /* Space for subtle scrollbar */
-        }
-
-        /* Subtle scrollbar for tabs */
-        .tab-nav::-webkit-scrollbar {
-            height: 4px;
-        }
-        .tab-nav::-webkit-scrollbar-thumb {
-            background-color: #d1d5db;
-            border-radius: 4px;
-        }
-        .tab-nav::-webkit-scrollbar-track {
-            background-color: transparent;
+            padding: 0;
         }
 
         .tab-item {
-            flex: 0 0 auto; /* Prevents tabs from shrinking and wrapping */
-            padding: 10px 14px;
+            padding: 10px 12px; /* Snug padding to help fit all tabs nicely */
             font-size: 12px;
             color: #6b7280;
             text-decoration: none;
@@ -71,6 +59,7 @@
             border: 1px solid #d1d5db;
             margin-right: -1px; /* Collapses overlapping borders to attach tabs */
             transition: background-color 0.2s ease;
+            white-space: nowrap; /* Prevents text from breaking into two lines */
         }
 
         .tab-item:first-child {
